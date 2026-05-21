@@ -7,10 +7,6 @@ if [[ "$1" == "-rf" || "$1" == "-f" || "$1" == "-r" ]]; then
   fi
   /bin/rm "$@"
   status=$?
-  if [ $status -eq 0 ]; then
-    shift
-    echo "⚠️  $@ was permanently removed"
-  fi
   exit $status
 fi
 
