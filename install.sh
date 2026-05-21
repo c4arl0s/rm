@@ -13,8 +13,8 @@ if [[ ! -f "${SOURCE_SCRIPT}" ]]; then
 fi
 
 echo "Installing ${TARGET_COMMAND} to ${TARGET_PATH}..."
-sudo cp "${SOURCE_SCRIPT}" "${TARGET_PATH}"
-sudo chmod +x "${TARGET_PATH}"
+sudo ln -sf "$(pwd)/${SOURCE_SCRIPT}" "${TARGET_PATH}"
+sudo chmod +x "$(pwd)/${SOURCE_SCRIPT}"
 
 echo "Installation complete."
 echo "Run '${TARGET_COMMAND}' <file>"

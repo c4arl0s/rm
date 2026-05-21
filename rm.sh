@@ -15,7 +15,16 @@ if [[ "$1" == "-rf" || "$1" == "-f" || "$1" == "-r" ]]; then
 fi
 
 file_to_delete=${1:?"Error. You must specify a file or directory as first parameter."}
-if mv "$file_to_delete" ~/.Trash/ > /dev/null 2>&1
+
+basename_file=$(basename "$file_to_delete")
+dest="$HOME/.Trash/$basename_file"
+
+if [ -e "$dest" ] || [ -L "$dest" ]; then
+  timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+  dest="$HOME/.Trash/${basename_file}_${timestamp}"
+fi
+
+if mv "$file_to_delete" "$dest" > /dev/null 2>&1
 then
   echo "✅ $file_to_delete was moved to .Trash directory"
 else
