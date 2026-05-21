@@ -1,6 +1,10 @@
 #!/bin/bash
 
-if [[ "$1" == "-rf" ]]; then
+if [[ "$1" == "-rf" || "$1" == "-f" || "$1" == "-r" ]]; then
+  if [[ -z "$2" ]]; then
+    echo "Error: It is missing file or directory as second parameter"
+    exit 1
+  fi
   /bin/rm "$@"
   status=$?
   if [ $status -eq 0 ]; then
