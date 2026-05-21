@@ -2,7 +2,12 @@
 
 if [[ "$1" == "-rf" ]]; then
   /bin/rm "$@"
-  exit $?
+  status=$?
+  if [ $status -eq 0 ]; then
+    shift
+    echo "⚠️  $@ was permanently removed"
+  fi
+  exit $status
 fi
 
 file_to_delete=${1:?"Error. You must specify a file or directory as first parameter."}
